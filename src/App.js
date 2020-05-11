@@ -9,6 +9,7 @@ import CreateAccount from './pages/CreateAccount';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Header from './components/Header';
+import SinglePost from './pages/SinglePost';
 
 // Styles
 import "./App.css"
@@ -121,9 +122,14 @@ function App() {
         <div className = "container">
           <img className = "Logo" src={Logo}/>
           <h1>Give your two cents to the conversation</h1>
-          <Route exact path = "/">
+          {/* <Route exact path = "/">
             {!loggedIn ? (<Login LoginFunction = {LoginFunction} />) : (<Home userInformation = {userInformation}/>)}
-            <Home />
+          </Route> */}
+          <Route exact path = "/">
+            {!loggedIn ? (<Redirect to = "/login" />) : (<Home userInformation = {userInformation}/>)}
+          </Route>
+          <Route exact path = "/post/:id">
+            {!loggedIn ? (<Redirect to = "/login" />) : (<SinglePost/>)}
           </Route>
           <Route exact path = "/login">
             {!loggedIn ? (<Login LoginFunction = {LoginFunction} />) : (<Redirect to = "/"/>)}
